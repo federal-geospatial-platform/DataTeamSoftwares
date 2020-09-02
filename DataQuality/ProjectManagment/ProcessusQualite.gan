@@ -59,7 +59,7 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="4" name="Phase#1- Read Access" color="#8cb6ce" meeting="false" start="2020-07-02" duration="158" complete="6" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
+        <task id="4" name="Phase#1- Read Access" color="#8cb6ce" meeting="false" start="2020-07-02" duration="158" complete="5" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
             <task id="0" name="CGP-Data quality needs" color="#8cb6ce" meeting="false" start="2020-07-02" duration="31" complete="0" thirdDate="2018-10-31" thirdDate-constraint="0" expand="true"/>
             <task id="33" name="New data quality conceptual model definition" color="#8cb6ce" meeting="false" start="2020-08-17" duration="15" complete="0" thirdDate="2020-06-15" thirdDate-constraint="0" expand="true">
                 <depend id="8" type="2" difference="0" hardness="Strong"/>
@@ -74,7 +74,11 @@
             <task id="17" name="Old DQ records migration- Analysis" color="#8cb6ce" meeting="false" start="2020-08-17" duration="15" complete="90" thirdDate="2020-05-01" thirdDate-constraint="0" expand="true">
                 <depend id="28" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="28" name="Old DQ records migration- DEV" color="#8cb6ce" meeting="false" start="2020-09-29" duration="20" complete="0" thirdDate="2020-05-25" thirdDate-constraint="0" expand="true"/>
+            <task id="28" name="Old DQ records migration- minimal content" color="#8cb6ce" meeting="false" start="2020-09-29" duration="20" complete="0" thirdDate="2020-05-25" thirdDate-constraint="0" expand="true">
+                <notes><![CDATA[Without automation]]></notes>
+                <depend id="43" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="43" name="Old DQ records migration- full content" color="#8cb6ce" meeting="false" start="2020-10-27" duration="45" complete="0" thirdDate="2020-08-03" thirdDate-constraint="0" expand="true"/>
             <task id="6" name="Transaction model definition" color="#8cb6ce" meeting="false" start="2020-09-21" duration="10" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true"/>
             <task id="9" name="SOW-Creation" color="#8cb6ce" meeting="false" start="2020-09-14" duration="25" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
                 <depend id="12" type="2" difference="15" hardness="Rubber"/>
