@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="MigrationQualité" company="" webLink="http://" view-date="2020-08-03" view-index="0" gantt-divider-location="511" resource-divider-location="509" version="2.8.10" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="MigrationQualité" company="" webLink="http://" view-date="2020-07-20" view-index="0" gantt-divider-location="511" resource-divider-location="509" version="2.8.10" locale="fr">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Nom" width="365" order="0"/>
@@ -59,27 +59,27 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="4" name="Phase#1- Read Access" color="#8cb6ce" meeting="false" start="2020-07-02" duration="158" complete="5" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
-            <task id="0" name="CGP-Data quality needs" color="#8cb6ce" meeting="false" start="2020-07-02" duration="31" complete="0" thirdDate="2018-10-31" thirdDate-constraint="0" expand="true"/>
-            <task id="33" name="New data quality conceptual model definition" color="#8cb6ce" meeting="false" start="2020-08-17" duration="15" complete="0" thirdDate="2020-06-15" thirdDate-constraint="0" expand="true">
+        <task id="4" name="Phase#1- Read Access" color="#8cb6ce" meeting="false" start="2020-08-17" duration="126" complete="5" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
+            <task id="0" name="CGP-Data quality needs" color="#8cb6ce" meeting="false" start="2020-08-25" duration="14" complete="0" thirdDate="2018-10-31" thirdDate-constraint="0" expand="true"/>
+            <task id="33" name="New data quality conceptual model definition" color="#8cb6ce" meeting="false" start="2020-08-17" duration="20" complete="0" thirdDate="2020-06-15" thirdDate-constraint="0" expand="true">
                 <depend id="8" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="8" name="New data quality relational DB model definition" color="#8cb6ce" meeting="false" start="2020-09-07" duration="11" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
+            <task id="8" name="New data quality relational DB model definition" color="#8cb6ce" meeting="false" start="2020-09-14" duration="11" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
                 <depend id="28" type="2" difference="0" hardness="Strong"/>
                 <depend id="41" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="41" name="New data quality relational DB model implementation" color="#8cb6ce" meeting="false" start="2020-09-22" duration="5" complete="0" thirdDate="2020-06-15" thirdDate-constraint="0" expand="true">
+            <task id="41" name="New data quality relational DB model implementation" color="#8cb6ce" meeting="false" start="2020-09-29" duration="5" complete="0" thirdDate="2020-06-15" thirdDate-constraint="0" expand="true">
                 <depend id="28" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="17" name="Old DQ records migration- Analysis" color="#8cb6ce" meeting="false" start="2020-08-17" duration="15" complete="90" thirdDate="2020-05-01" thirdDate-constraint="0" expand="true">
                 <depend id="28" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="28" name="Old DQ records migration- minimal content" color="#8cb6ce" meeting="false" start="2020-09-29" duration="20" complete="0" thirdDate="2020-05-25" thirdDate-constraint="0" expand="true">
+            <task id="28" name="Old DQ records migration- minimal content" color="#8cb6ce" meeting="false" start="2020-10-06" duration="20" complete="0" thirdDate="2020-05-25" thirdDate-constraint="0" expand="true">
                 <notes><![CDATA[Without automation]]></notes>
                 <depend id="43" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="43" name="Old DQ records migration- full content" color="#8cb6ce" meeting="false" start="2020-10-27" duration="45" complete="0" thirdDate="2020-08-03" thirdDate-constraint="0" expand="true"/>
-            <task id="6" name="Transaction model definition" color="#8cb6ce" meeting="false" start="2020-09-21" duration="10" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true"/>
+            <task id="43" name="Old DQ records migration- full content" color="#8cb6ce" meeting="false" start="2020-11-03" duration="45" complete="0" thirdDate="2020-08-03" thirdDate-constraint="0" expand="true"/>
+            <task id="6" name="Transaction model definition" color="#8cb6ce" meeting="false" start="2020-09-21" duration="20" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true"/>
             <task id="9" name="SOW-Creation" color="#8cb6ce" meeting="false" start="2020-09-14" duration="25" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true">
                 <depend id="12" type="2" difference="15" hardness="Rubber"/>
             </task>
@@ -89,6 +89,7 @@
             </task>
             <task id="22" name="Deployment" color="#8cb6ce" meeting="false" start="2021-02-10" duration="1" complete="0" thirdDate="2020-10-05" thirdDate-constraint="0" expand="true"/>
         </task>
+        <task id="60" name="SQL_Training" color="#8cb6ce" meeting="false" start="2020-09-02" duration="13" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true"/>
         <task id="2" name="OpenAPI learning and training" color="#8cb6ce" meeting="false" start="2020-06-29" duration="46" complete="0" thirdDate="2020-06-29" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources>
@@ -100,12 +101,14 @@
     <allocations>
         <allocation task-id="2" resource-id="9" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="28" resource-id="9" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="9" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="60" resource-id="9" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="2" resource-id="10" function="Default:0" responsible="true" load="100.0"/>
-        <allocation task-id="8" resource-id="10" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="9" resource-id="10" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="12" resource-id="10" function="Default:0" responsible="true" load="10.0"/>
         <allocation task-id="0" resource-id="11" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="17" resource-id="11" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="60" resource-id="11" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="9" resource-id="12" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="28" resource-id="12" function="Default:0" responsible="false" load="10.0"/>
     </allocations>
