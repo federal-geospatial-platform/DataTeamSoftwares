@@ -1,0 +1,621 @@
+{
+	"info": {
+		"_postman_id": "414d1b8f-3c88-4e30-a8b7-f267521344f9",
+		"name": "FGP-GeoNetWork3.6 API- Upload/Publish/Approve",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "2-A. Extracting workspace",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/api/groups",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"api",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-B. Extracting user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+					}
+				],
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/api/users",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-C. Extracting metadata",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<csw:GetRecords xmlns:csw=\"http://www.opengis.net/cat/csw/2.0.2\"\r\n    xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" service=\"CSW\" version=\"2.0.2\"\r\n    resultType=\"results_with_summary\" startPosition='1' maxRecords='10'>\r\n    <csw:Query typeNames=\"gmd:MD_Metadata\">\r\n    <csw:Constraint version=\"1.1.0\">\r\n      <Filter xmlns=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\">\r\n        <PropertyIsEqualTo>\r\n          <PropertyName>dc:identifier</PropertyName>\r\n          <Literal>fefbbaf3-3d33-4a0b-94b5-85f5ccd0eca2</Literal>\r\n        </PropertyIsEqualTo>\r\n      </Filter>\r\n    </csw:Constraint>\r\n    </csw:Query>\r\n</csw:GetRecords>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/csw",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"csw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.\tUploading metadata",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "2de4af3d-69ac-4a9c-b1ec-eb6234d55cb2",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " multipart/form-data; boundary=---------------------------132797856227398911421313208406",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"language\"\r\n\r\neng\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"metadataType\"\r\n\r\nMETADATA\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"uuidProcessing\"\r\n\r\nOVERWRITE\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"transformWith\"\r\n\r\n\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"rejectIfInvalid\"\r\n\r\non\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"group\"\r\n\r\n812588\r\n-----------------------------132797856227398911421313208406\r\nContent-Disposition: form-data; name=\"file\"; filename=\"QC_0c0bc533-f539-4ca8-92b4-2d521fd6542e.xml\"\r\nContent-Type: text/xml\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<MD_Metadata xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:gml=\"http://www.opengis.net/gml/3.2\" xmlns:gfc=\"http://www.isotc211.org/2005/gfc\" xmlns:gts=\"http://www.isotc211.org/2005/gts\" xmlns:gss=\"http://www.isotc211.org/2005/gss\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:gmx=\"http://www.isotc211.org/2005/gmx\" xmlns:gsr=\"http://www.isotc211.org/2005/gsr\" xmlns:gco=\"http://www.isotc211.org/2005/gco\" xmlns:gmi=\"http://www.isotc211.org/2005/gmi\" xmlns:srv=\"http://www.isotc211.org/2005/srv\" xmlns:geonet=\"http://www.fao.org/geonetwork\" xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" xmlns=\"http://www.isotc211.org/2005/gmd\" xsi:schemaLocation=\"http://www.isotc211.org/2005/gmd http://nap.geogratis.gc.ca/metadata/tools/schemas/metadata/can-cgsb-171.100-2009-a/gmd/gmd.xsd http://www.isotc211.org/2005/srv http://nap.geogratis.gc.ca/metadata/tools/schemas/metadata/can-cgsb-171.100-2009-a/srv/srv.xsd http://www.geconnections.org/nap/napMetadataTools/napXsd/napm http://nap.geogratis.gc.ca/metadata/tools/schemas/metadata/can-cgsb-171.100-2009-a/napm/napm.xsd\">\r\n<fileIdentifier>\r\n<gco:CharacterString>0c0bc533-f539-4ca8-92b4-2d521fd6542e</gco:CharacterString>\r\n</fileIdentifier>\r\n<language>\r\n<gco:CharacterString>eng; CAN</gco:CharacterString>\r\n</language>\r\n<characterSet>\r\n<MD_CharacterSetCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_95\" codeListValue=\"RI_458\">utf8; utf8</MD_CharacterSetCode>\r\n</characterSet>\r\n<hierarchyLevel>\r\n<MD_ScopeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_108\" codeListValue=\"RI_622\">dataset; jeuDonnées</MD_ScopeCode>\r\n</hierarchyLevel>\r\n<contact>\r\n<CI_ResponsibleParty>\r\n<individualName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Réseau de transport métropolitain / Performance et expérience client / Géomatique</gco:CharacterString>\r\n</individualName>\r\n<organisationName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government and Municipalities of Québec; Government and Municipalities of Québec; Exo</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Gouvernement et municipalités du Québec; Gouvernement et municipalités du Québec; Exo</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</organisationName>\r\n<positionName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</positionName>\r\n<contactInfo>\r\n<CI_Contact>\r\n<phone>\r\n<CI_Telephone>\r\n<voice xmlns:napm=\"http://www.geoconnections.org/nap/napMetadataTools/napXsd/napm\" xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</voice>\r\n<facsimile>\r\n<gco:CharacterString></gco:CharacterString>\r\n</facsimile>\r\n</CI_Telephone>\r\n</phone>\r\n<address>\r\n<CI_Address>\r\n<deliveryPoint xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</deliveryPoint>\r\n<city>\r\n<gco:CharacterString></gco:CharacterString>\r\n</city>\r\n<administrativeArea xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</administrativeArea>\r\n<postalCode>\r\n<gco:CharacterString></gco:CharacterString>\r\n</postalCode>\r\n<country xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</country>\r\n<electronicMailAddress xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>donneesouvertes@exo.quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">donneesouvertes@exo.quebec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</electronicMailAddress>\r\n</CI_Address>\r\n</address>\r\n<onlineResource>\r\n<CI_OnlineResource>\r\n<linkage>\r\n<URL>https://www.donneesquebec.ca</URL>\r\n</linkage>\r\n<protocol>\r\n<gco:CharacterString>HTTPS</gco:CharacterString>\r\n</protocol>\r\n<description xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>An open data-sharing platform born of collaboration between cities and the Government of Quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Une plateforme de partage de données ouvertes née de la collaboration entre les villes et le gouvernement du Québec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</description>\r\n</CI_OnlineResource>\r\n</onlineResource>\r\n</CI_Contact>\r\n</contactInfo>\r\n<role>\r\n<CI_RoleCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_90\" codeListValue=\"RI_418\">author; auteur</CI_RoleCode>\r\n</role>\r\n</CI_ResponsibleParty>\r\n</contact>\r\n<dateStamp>\r\n<gco:Date>2019-10-25</gco:Date>\r\n</dateStamp>\r\n<metadataStandardName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>North American Profile of ISO 19115:2003 - Geographic information - Metadata</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Profil nord-américain de la norme ISO 19115:2003 - Information géographique - Métadonnées</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</metadataStandardName>\r\n<metadataStandardVersion>\r\n<gco:CharacterString>HNAP ISO:19115 - 2003</gco:CharacterString>\r\n</metadataStandardVersion>\r\n<dataSetURI gco:nilReason=\"missing\">\r\n<gco:CharacterString></gco:CharacterString>\r\n</dataSetURI>\r\n<locale>\r\n<PT_Locale id=\"fra\">\r\n<languageCode>\r\n<LanguageCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_116\" codeListValue=\"fra\">French; Français</LanguageCode>\r\n</languageCode>\r\n<country>\r\n<Country codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_117\" codeListValue=\"CAN\">Canada; Canada</Country>\r\n</country>\r\n<characterEncoding>\r\n<MD_CharacterSetCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_95\" codeListValue=\"RI_458\">utf8; utf8</MD_CharacterSetCode>\r\n</characterEncoding>\r\n</PT_Locale>\r\n</locale>\r\n<referenceSystemInfo>\r\n<MD_ReferenceSystem>\r\n<referenceSystemIdentifier>\r\n<RS_Identifier>\r\n<code>\r\n<gco:CharacterString>unknown</gco:CharacterString>\r\n</code>\r\n<codeSpace>\r\n<gco:CharacterString>unknown</gco:CharacterString>\r\n</codeSpace>\r\n<version>\r\n<gco:CharacterString>unknown</gco:CharacterString>\r\n</version>\r\n</RS_Identifier>\r\n</referenceSystemIdentifier>\r\n</MD_ReferenceSystem>\r\n</referenceSystemInfo>\r\n<identificationInfo>\r\n<MD_DataIdentification>\r\n<citation>\r\n<CI_Citation>\r\n<title xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Bus - South West Sector - Scheduled timetables and routes</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Autobus - Secteur Sud-ouest - Horaires et parcours planifiés</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</title>\r\n<date>\r\n<CI_Date>\r\n<date>\r\n<gco:Date>2012-09-13</gco:Date>\r\n</date>\r\n<dateType>\r\n<CI_DateTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_87\" codeListValue=\"RI_367\">publication; publication</CI_DateTypeCode>\r\n</dateType>\r\n</CI_Date>\r\n</date>\r\n<date>\r\n<CI_Date>\r\n<date>\r\n<gco:Date>2012-09-13</gco:Date>\r\n</date>\r\n<dateType>\r\n<CI_DateTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_87\" codeListValue=\"RI_366\">creation; création</CI_DateTypeCode>\r\n</dateType>\r\n</CI_Date>\r\n</date>\r\n<identifier>\r\n<MD_Identifier>\r\n<code></code>\r\n</MD_Identifier>\r\n</identifier>\r\n<citedResponsibleParty>\r\n<CI_ResponsibleParty>\r\n<individualName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Réseau de transport métropolitain / Performance et expérience client / Géomatique</gco:CharacterString>\r\n</individualName>\r\n<organisationName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government and Municipalities of Québec; Government and Municipalities of Québec; Exo</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Gouvernement et municipalités du Québec; Gouvernement et municipalités du Québec; Exo</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</organisationName>\r\n<positionName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</positionName>\r\n<contactInfo>\r\n<CI_Contact>\r\n<phone>\r\n<CI_Telephone>\r\n<voice xmlns:napm=\"http://www.geoconnections.org/nap/napMetadataTools/napXsd/napm\" xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</voice>\r\n<facsimile>\r\n<gco:CharacterString></gco:CharacterString>\r\n</facsimile>\r\n</CI_Telephone>\r\n</phone>\r\n<address>\r\n<CI_Address>\r\n<deliveryPoint xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</deliveryPoint>\r\n<city>\r\n<gco:CharacterString></gco:CharacterString>\r\n</city>\r\n<administrativeArea xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</administrativeArea>\r\n<postalCode>\r\n<gco:CharacterString></gco:CharacterString>\r\n</postalCode>\r\n<country xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</country>\r\n<electronicMailAddress xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>donneesouvertes@exo.quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">donneesouvertes@exo.quebec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</electronicMailAddress>\r\n</CI_Address>\r\n</address>\r\n<onlineResource>\r\n<CI_OnlineResource>\r\n<linkage>\r\n<URL>https://www.donneesquebec.ca</URL>\r\n</linkage>\r\n<protocol>\r\n<gco:CharacterString>HTTPS</gco:CharacterString>\r\n</protocol>\r\n<description xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>An open data-sharing platform born of collaboration between cities and the Government of Quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Une plateforme de partage de données ouvertes née de la collaboration entre les villes et le gouvernement du Québec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</description>\r\n</CI_OnlineResource>\r\n</onlineResource>\r\n</CI_Contact>\r\n</contactInfo>\r\n<role>\r\n<CI_RoleCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_90\" codeListValue=\"RI_418\">author; auteur</CI_RoleCode>\r\n</role>\r\n</CI_ResponsibleParty>\r\n</citedResponsibleParty>\r\n</CI_Citation>\r\n</citation>\r\n<abstract xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Exo makes its schedule and planned route data available in a standardized format, *General Transit Feed Specification* (GTFS).\r\n\r\n**This third party metadata element was translated using an automated translation tool (Amazon Translate).**</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Exo rend disponibles ses données sur les horaires et les parcours planifiés au format standardisé *General Transit Feed Specification* (GTFS).</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</abstract>\r\n<status>\r\n<MD_ProgressCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_106\" codeListValue=\"RI_596\">onGoing; enContinue</MD_ProgressCode>\r\n</status>\r\n<resourceMaintenance>\r\n<MD_MaintenanceInformation>\r\n<maintenanceAndUpdateFrequency>\r\n<MD_MaintenanceFrequencyCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_102\" codeListValue=\"RI_540\">asNeeded; auBesoin</MD_MaintenanceFrequencyCode>\r\n</maintenanceAndUpdateFrequency>\r\n</MD_MaintenanceInformation>\r\n</resourceMaintenance>\r\n<graphicOverview>\r\n<MD_BrowseGraphic>\r\n<fileName>\r\n<gco:CharacterString>https://raw.githubusercontent.com/federal-geospatial-platform/fgp-metadata-proxy/master/images/resampled/exo.png</gco:CharacterString>\r\n</fileName>\r\n</MD_BrowseGraphic>\r\n</graphicOverview>\r\n<descriptiveKeywords>\r\n<MD_Keywords>\r\n<keyword xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Transit Organizing Authority</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Autorité organisatrice de transport en commun</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</keyword>\r\n<keyword xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Transport of persons</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Transport des personnes</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</keyword>\r\n<keyword xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Transit</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Transport en commun</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</keyword>\r\n<type>\r\n<MD_KeywordTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_101\" codeListValue=\"RI_528\">theme; thème</MD_KeywordTypeCode>\r\n</type>\r\n</MD_Keywords>\r\n</descriptiveKeywords>\r\n<descriptiveKeywords>\r\n<MD_Keywords>\r\n<keyword xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government information</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Information gouvernementale</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</keyword>\r\n<type>\r\n<MD_KeywordTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_101\" codeListValue=\"RI_528\">theme; thème</MD_KeywordTypeCode>\r\n</type>\r\n<thesaurusName>\r\n<CI_Citation>\r\n<title xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government of Canada Core Subject Thesaurus</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Thésaurus des sujets de base du gouvernement du Canada</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</title>\r\n<date>\r\n<CI_Date>\r\n<date>\r\n<gco:Date>2004</gco:Date>\r\n</date>\r\n<dateType>\r\n<CI_DateTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_87\" codeListValue=\"RI_366\">creation; création</CI_DateTypeCode>\r\n</dateType>\r\n</CI_Date>\r\n</date>\r\n<date>\r\n<CI_Date>\r\n<date>\r\n<gco:Date>2016-04-21</gco:Date>\r\n</date>\r\n<dateType>\r\n<CI_DateTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_87\" codeListValue=\"RI_367\">publication; publication</CI_DateTypeCode>\r\n</dateType>\r\n</CI_Date>\r\n</date>\r\n<citedResponsibleParty>\r\n<CI_ResponsibleParty>\r\n<organisationName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government of Canada; Library and Archives Canada</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Gouvernement du Canada; Bibliothèque et Archives Canada</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</organisationName>\r\n<role>\r\n<CI_RoleCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_90\" codeListValue=\"RI_409\">custodian; conservateur</CI_RoleCode>\r\n</role>\r\n</CI_ResponsibleParty>\r\n</citedResponsibleParty>\r\n</CI_Citation>\r\n</thesaurusName>\r\n</MD_Keywords>\r\n</descriptiveKeywords>\r\n<resourceConstraints>\r\n<MD_LegalConstraints>\r\n<useLimitation xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Creative Commons 4.0 Attribution (CC-BY) licence – Quebec (https://www.donneesquebec.ca/fr/licence/)</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Licence Creative Commons 4.0 Attribution (CC-BY) – Québec (https://www.donneesquebec.ca/fr/licence/)</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</useLimitation>\r\n<accessConstraints>\r\n<MD_RestrictionCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_107\" codeListValue=\"RI_606\">license; licence</MD_RestrictionCode>\r\n</accessConstraints>\r\n<useConstraints>\r\n<MD_RestrictionCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_107\" codeListValue=\"RI_606\">license; licence</MD_RestrictionCode>\r\n</useConstraints>\r\n<otherConstraints xsi:type=\"gmd:PT_FreeText_PropertyType\" gco:nilReason=\"missing\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</otherConstraints>\r\n</MD_LegalConstraints>\r\n</resourceConstraints>\r\n<spatialRepresentationType>\r\n<MD_SpatialRepresentationTypeCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_109\" codeListValue=\"RI_637\">textTable; texteTable</MD_SpatialRepresentationTypeCode>\r\n</spatialRepresentationType>\r\n<language>\r\n<gco:CharacterString>eng; CAN</gco:CharacterString>\r\n</language>\r\n<language>\r\n<gco:CharacterString>fra; CAN</gco:CharacterString>\r\n</language>\r\n<characterSet>\r\n<MD_CharacterSetCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_95\" codeListValue=\"\"></MD_CharacterSetCode>\r\n</characterSet>\r\n<topicCategory>\r\n<MD_TopicCategoryCode>geoscientificInformation</MD_TopicCategoryCode>\r\n</topicCategory>\r\n<environmentDescription gco:nilReason=\"missing\">\r\n<gco:CharacterString></gco:CharacterString>\r\n</environmentDescription>\r\n<extent>\r\n<EX_Extent>\r\n<temporalElement>\r\n<EX_TemporalExtent>\r\n<extent gco:nilReason=\"missing\">\r\n<gml:TimePeriod gml:id=\"timeperiod1\">\r\n<gml:beginPosition>0001-01-01</gml:beginPosition>\r\n<gml:endPosition></gml:endPosition>\r\n</gml:TimePeriod>\r\n</extent>\r\n</EX_TemporalExtent>\r\n</temporalElement>\r\n</EX_Extent>\r\n</extent>\r\n<extent>\r\n<EX_Extent>\r\n<geographicElement>\r\n<EX_GeographicBoundingBox>\r\n<westBoundLongitude>\r\n<gco:Decimal>-79.599999999999994</gco:Decimal>\r\n</westBoundLongitude>\r\n<eastBoundLongitude>\r\n<gco:Decimal>-57</gco:Decimal>\r\n</eastBoundLongitude>\r\n<southBoundLatitude>\r\n<gco:Decimal>45</gco:Decimal>\r\n</southBoundLatitude>\r\n<northBoundLatitude>\r\n<gco:Decimal>62.600000000000001</gco:Decimal>\r\n</northBoundLatitude>\r\n</EX_GeographicBoundingBox>\r\n</geographicElement>\r\n</EX_Extent>\r\n</extent>\r\n<supplementalInformation gco:nilReason=\"missing\">\r\n<gco:CharacterString></gco:CharacterString>\r\n</supplementalInformation>\r\n</MD_DataIdentification>\r\n</identificationInfo>\r\n<distributionInfo>\r\n<MD_Distribution>\r\n<distributionFormat>\r\n<MD_Format>\r\n<name>\r\n<gco:CharacterString>HTML</gco:CharacterString>\r\n</name>\r\n<version>\r\n<gco:CharacterString>unknown</gco:CharacterString>\r\n</version>\r\n</MD_Format>\r\n</distributionFormat>\r\n<distributionFormat>\r\n<MD_Format>\r\n<name>\r\n<gco:CharacterString>other</gco:CharacterString>\r\n</name>\r\n<version>\r\n<gco:CharacterString>unknown</gco:CharacterString>\r\n</version>\r\n</MD_Format>\r\n</distributionFormat>\r\n<distributor>\r\n<MD_Distributor>\r\n<distributorContact>\r\n<CI_ResponsibleParty>\r\n<individualName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Réseau de transport métropolitain / Performance et expérience client / Géomatique</gco:CharacterString>\r\n</individualName>\r\n<organisationName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Government and Municipalities of Québec; Government and Municipalities of Québec; Exo</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Gouvernement et municipalités du Québec; Gouvernement et municipalités du Québec; Exo</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</organisationName>\r\n<positionName xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</positionName>\r\n<contactInfo>\r\n<CI_Contact>\r\n<phone>\r\n<CI_Telephone>\r\n<voice xmlns:napm=\"http://www.geoconnections.org/nap/napMetadataTools/napXsd/napm\" xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</voice>\r\n<facsimile>\r\n<gco:CharacterString></gco:CharacterString>\r\n</facsimile>\r\n</CI_Telephone>\r\n</phone>\r\n<address>\r\n<CI_Address>\r\n<deliveryPoint xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</deliveryPoint>\r\n<city>\r\n<gco:CharacterString></gco:CharacterString>\r\n</city>\r\n<administrativeArea xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</administrativeArea>\r\n<postalCode>\r\n<gco:CharacterString></gco:CharacterString>\r\n</postalCode>\r\n<country xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString></gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\"></LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</country>\r\n<electronicMailAddress xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>donneesouvertes@exo.quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">donneesouvertes@exo.quebec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</electronicMailAddress>\r\n</CI_Address>\r\n</address>\r\n<onlineResource>\r\n<CI_OnlineResource>\r\n<linkage>\r\n<URL>https://www.donneesquebec.ca</URL>\r\n</linkage>\r\n<protocol>\r\n<gco:CharacterString>HTTPS</gco:CharacterString>\r\n</protocol>\r\n<description xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>An open data-sharing platform born of collaboration between cities and the Government of Quebec</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Une plateforme de partage de données ouvertes née de la collaboration entre les villes et le gouvernement du Québec</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</description>\r\n</CI_OnlineResource>\r\n</onlineResource>\r\n</CI_Contact>\r\n</contactInfo>\r\n<role>\r\n<CI_RoleCode codeList=\"http://nap.geogratis.gc.ca/metadata/register/napMetadataRegister.xml#IC_90\" codeListValue=\"RI_418\">author; auteur</CI_RoleCode>\r\n</role>\r\n</CI_ResponsibleParty>\r\n</distributorContact>\r\n</MD_Distributor>\r\n</distributor>\r\n<transferOptions>\r\n<MD_DigitalTransferOptions>\r\n<onLine xlink:role=\"\">\r\n<CI_OnlineResource>\r\n<linkage>\r\n<URL>https://www.donneesquebec.ca/recherche/fr/dataset/0c0bc533-f539-4ca8-92b4-2d521fd6542e</URL>\r\n</linkage>\r\n<protocol>\r\n<gco:CharacterString>HTTPS</gco:CharacterString>\r\n</protocol>\r\n<name xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Original Metadata (https://www.donneesquebec.ca)</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Métadonnée originale (https://www.donneesquebec.ca)</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</name>\r\n<description xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Dataset;HTML;fra</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Données;HTML;fra</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</description>\r\n</CI_OnlineResource>\r\n</onLine>\r\n</MD_DigitalTransferOptions>\r\n</transferOptions>\r\n<transferOptions>\r\n<MD_DigitalTransferOptions>\r\n<onLine xlink:role=\"\">\r\n<CI_OnlineResource>\r\n<linkage>\r\n<URL>https://exo.quebec/xdata/citso/google_transit.zip</URL>\r\n</linkage>\r\n<protocol>\r\n<gco:CharacterString>HTTPS</gco:CharacterString>\r\n</protocol>\r\n<name xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Bus - South West Sector (GTFS)</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Autobus - Secteur Sud-ouest (GTFS)</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</name>\r\n<description xsi:type=\"gmd:PT_FreeText_PropertyType\">\r\n<gco:CharacterString>Dataset;other;fra</gco:CharacterString>\r\n<PT_FreeText>\r\n<textGroup>\r\n<LocalisedCharacterString locale=\"#fra\">Données;other;fra</LocalisedCharacterString>\r\n</textGroup>\r\n</PT_FreeText>\r\n</description>\r\n</CI_OnlineResource>\r\n</onLine>\r\n</MD_DigitalTransferOptions>\r\n</transferOptions>\r\n</MD_Distribution>\r\n</distributionInfo>\r\n</MD_Metadata>\r\n\r\n\r\n-----------------------------132797856227398911421313208406--\r\n",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/api/records",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"api",
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-A. Initiating publication",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/publish/eng?uuid=69d4380d-9227-4554-8962-0e32c833969c",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"publish",
+						"eng"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "69d4380d-9227-4554-8962-0e32c833969c"
+						},
+						{
+							"key": "_content_type",
+							"value": "xml",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-B. Selecting workspaces",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "0a60daaf-f684-4155-b96b-8deb666d8c3e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "821533",
+							"type": "text"
+						},
+						{
+							"key": "requestType",
+							"value": "P",
+							"type": "text"
+						},
+						{
+							"key": "_0",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "_72",
+							"value": "on",
+							"type": "text"
+						},
+						{
+							"key": "showLicense",
+							"value": "y",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/publish/eng?_content_type=html",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"publish",
+						"eng"
+					],
+					"query": [
+						{
+							"key": "_content_type",
+							"value": "html"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-C.Accepting Terms and Conditions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "0a60daaf-f684-4155-b96b-8deb666d8c3e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "821533",
+							"type": "text"
+						},
+						{
+							"key": "requestType",
+							"value": "P",
+							"type": "text"
+						},
+						{
+							"key": "mode",
+							"value": "license",
+							"type": "text"
+						},
+						{
+							"key": "_0",
+							"value": "on",
+							"type": "text"
+						},
+						{
+							"key": "_72",
+							"value": "on",
+							"type": "text"
+						},
+						{
+							"key": "license_agreement_check",
+							"value": "on",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/publish/eng?_content_type=html",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"publish",
+						"eng"
+					],
+					"query": [
+						{
+							"key": "_content_type",
+							"value": "html"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-D.Selecting the approval",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "6a422999-4a0c-4c47-a533-16e26c85b66c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_content_type",
+							"value": "html",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "857855",
+							"type": "text"
+						},
+						{
+							"key": "requestType",
+							"value": "P",
+							"type": "text"
+						},
+						{
+							"key": "validateBothLanguages",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "_0",
+							"value": "on",
+							"type": "text"
+						},
+						{
+							"key": "_96",
+							"value": "on",
+							"type": "text"
+						},
+						{
+							"key": "contentReviewer",
+							"value": "3288",
+							"type": "text"
+						},
+						{
+							"key": "additionalMailCC",
+							"value": "&attachFile",
+							"type": "text"
+						},
+						{
+							"key": "comments_request",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/submit/eng",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"submit",
+						"eng"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6-A.Identifying publication requests",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/list/eng",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"list",
+						"eng"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6-B.Approving publication request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "24f2c6a3-578e-4b64-ae12-dc3fb60f4cc3",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"type\":\"approve\",\"requests\":[{\"id\":839477,\"comments\":\"\",\"cr\":\"3288\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gcgeo.gc.ca/geonetwork/srv/canada/workflow/process/eng",
+					"protocol": "https",
+					"host": [
+						"gcgeo",
+						"gc",
+						"ca"
+					],
+					"path": [
+						"geonetwork",
+						"srv",
+						"canada",
+						"workflow",
+						"process",
+						"eng"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
