@@ -1,0 +1,37 @@
+{
+  "metadata_information": {
+    "uuid":<<metadata_uuid>>,  
+    "url": "https://gcgeo.gc.ca/geonetwork/metadata/eng/<<metadata_uuid>>",
+    "last_modified_date": "<<metadata_date_stamp>>",
+    "title": {
+      "en": "<<metadata_title_en>>",
+      "fr": "<<metadata_title_fr>>"
+    }
+  },
+  "quality_records": [{
+    "quality_record_information": {
+      "id": <<quality_id>>,
+      "assessment_date": "<<assessment_date>>",
+      "metadata_date_when_assessed": "<<version_when_assessed>>",
+      "resources_available_when_assessed": "<<resources_when_assessed>>"
+    },
+    "quality_indicators": [{
+      "code": "<<indicator_code>>",
+      "definition": {
+        "en": "<<indicator_en>>",
+        "fr": "<<indicator_fr>> "
+      },
+      "sub_indicators": [{
+        "code": "<<sub_indicator_code>>",
+        "definition": {
+          "en": "<<sub_indicator_code_en>>",
+          "fr": "<<<<sub_indicator_code_fr>>"
+        },
+        "indicator_variables": [{
+          "code": "<<indicator_variable_code>>",
+          "definition": {
+            "en": "<< indicator_variable_en >>",
+            "fr": "<< indicator_variable_fr>>"
+          },
+          "value": "<< indicator_variable_value >>"
+        }]}]}]}]}
